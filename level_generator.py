@@ -15,17 +15,7 @@ class LevelGenerator:
                 if self.level[row][column] != 0:
                     continue
 
-                possible_numbers = self.possible_values_per_cell[row][column]
-                random_index = random.randrange(len(possible_numbers))
-                number = possible_numbers.pop(random_index)
-                self.level[row][column] = number
-                self.possible_values_per_cell[row][column] = []
-
-                self._update_all_related_cells(
-                    row,
-                    column,
-                    number
-                )
+                self._set_random_number()
 
         return self.level
 
@@ -40,6 +30,19 @@ class LevelGenerator:
             for i in range(number)
         ]
         return randomCell
+
+    def _set_random_number(self, row, column):
+        possible_numbers = self.possible_values_per_cell[row][column]
+        random_index = random.randrange(len(possible_numbers))
+        number = possible_numbers.pop(random_index)
+        self.level[row][column] = number
+        self.possible_values_per_cell[row][column] = []
+
+        self._update_all_related_cells(
+            row,
+            column,
+            number
+        )
 
     def _remove_possible_value_from(self, row, column, value_to_remove):
         if self.level[row][column] != 0:

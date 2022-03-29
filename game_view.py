@@ -1,5 +1,8 @@
 import math
 
+# TODO: Verificar como utilizar cores no terminal para informar coisas como
+# "Célula gerada", "Acertou" e etc, etc
+
 
 class bcolors:
     HEADER = '\033[95m'
